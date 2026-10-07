@@ -1,4 +1,6 @@
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
+import rehypeBaseImages from './src/lib/rehype-base-images.mjs';
 
 const owner = process.env.GITHUB_REPOSITORY_OWNER;
 const repository = process.env.GITHUB_REPOSITORY?.split('/')[1];
@@ -9,5 +11,10 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   site: onGitHub ? `https://${owner}.github.io` : 'http://localhost:4321',
-  base
+  base,
+  markdown: {
+    processor: unified({
+      rehypePlugins: [[rehypeBaseImages, { base }]]
+    })
+  }
 });

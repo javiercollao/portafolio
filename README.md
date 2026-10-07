@@ -23,7 +23,7 @@ publishedAt: 2026-10-07
 category: "Backend"
 number: "04"
 readingTime: "5 min"
-image: "material"
+cover: "/images/uploads/covers/mi-portada.webp"
 showInBlog: true
 showInWork: false
 workCategories: ["Backend", "APIs"]
@@ -33,7 +33,7 @@ draft: false
 Contenido del artículo en Markdown.
 ```
 
-Los valores disponibles para `image` son `material`, `whisperer`, `character`, `mellow` y `phone`.
+`cover` es la ruta de una imagen subida desde Pages CMS. Las publicaciones antiguas conservan temporalmente su campo `image` como respaldo; al asignarles una portada desde el panel, `cover` tendrá prioridad.
 
 - `showInBlog: true`: incluye la entrada en `/blog/`.
 - `showInWork: true`: incluye la entrada en `/work/` y entre los trabajos recientes de la portada.

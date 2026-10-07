@@ -1,14 +1,22 @@
 ---
 const { post, priority = false } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const coverUrl = post.data.cover && (/^(https?:)?\/\//.test(post.data.cover) || post.data.cover.startsWith('data:'))
+  ? post.data.cover
+  : post.data.cover
+    ? `${base}${post.data.cover.replace(/^\/+/, '')}`
+    : undefined;
 const date = post.data.publishedAt.toLocaleDateString('es-CL', {
   day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC'
 });
 ---
 
 <a class="post-card" href={`${base}blog/${post.id}/`}>
-  <div class={`reference-crop home-crop art-${post.data.image}`}>
-    <img src={`${base}images/home-reference.png`} alt="" fetchpriority={priority ? 'high' : undefined} />
+  <div class:list={['reference-crop', 'home-crop', !coverUrl && `art-${post.data.image}`]}>
+    {coverUrl
+      ? <img class="uploaded-cover" src={coverUrl} alt={`Portada de ${post.data.title}`} fetchpriority={priority ? 'high' : undefined} />
+      : <img src={`${base}images/home-reference.png`} alt="" fetchpriority={priority ? 'high' : undefined} />
+    }
   </div>
   <div class="card-meta"><span>{post.data.category}</span><span>{post.data.number}</span></div>
   <h2>{post.data.title}</h2>

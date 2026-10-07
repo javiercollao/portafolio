@@ -11,12 +11,15 @@ const blog = defineCollection({
     category: z.string(),
     number: z.string(),
     readingTime: z.string(),
-    image: z.enum(['material', 'whisperer', 'character', 'mellow', 'phone']),
+    cover: z.string().optional(),
+    image: z.enum(['material', 'whisperer', 'character', 'mellow', 'phone']).optional(),
     showInBlog: z.boolean().default(true),
     showInWork: z.boolean().default(false),
     workCategories: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
     draft: z.boolean().default(false)
+  }).refine(data => Boolean(data.cover || data.image), {
+    message: 'Cada publicación necesita una portada en cover.'
   })
 });
 

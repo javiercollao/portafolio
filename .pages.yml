@@ -99,23 +99,16 @@ content:
         required: true
         default: "5 min"
 
-      - name: image
-        label: Imagen de tarjeta
-        type: select
+      - name: cover
+        label: Imagen de portada
+        type: image
         required: true
-        default: material
+        description: Se utiliza en las tarjetas de Blog y Work.
         options:
-          values:
-            - name: material
-              label: Material / arquitectura
-            - name: whisperer
-              label: Modelo predictivo
-            - name: character
-              label: Aplicación móvil
-            - name: mellow
-              label: Datos y visualización
-            - name: phone
-              label: Realidad aumentada
+          media: content_images
+          path: covers
+          extensions: [jpg, jpeg, png, webp]
+          rename: safe
 
       - name: showInBlog
         label: Mostrar en Blog
