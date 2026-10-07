@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkGrid from '../components/WorkGrid.astro';
+import Pagination from '../components/Pagination.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const work = posts.filter(post => post.data.showInWork);
+const pageSize = 5;
+const lastPage = Math.max(1, Math.ceil(work.length / pageSize));
+const firstPage = {
+  data: work.slice(0, pageSize),
+  currentPage: 1,
+  lastPage,
+  url: { prev: undefined, next: lastPage > 1 ? '/work/2/' : undefined }
+};
+---
+
+<BaseLayout current="work">
+  <main id="main">
+    <WorkGrid posts={firstPage.data} />
+    <Pagination page={firstPage} />
+  </main>
+</BaseLayout>

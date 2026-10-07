@@ -1,0 +1,156 @@
+media:
+  - name: content_images
+    label: Imágenes del contenido
+    input: public/images/uploads
+    output: /images/uploads
+    rename: safe
+    categories: [image]
+
+content:
+  - name: posts
+    label: Publicaciones
+    type: collection
+    path: src/content/blog
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    subfolders: false
+
+    view:
+      primary: title
+      fields: [title, publishedAt, category, draft, showInBlog, showInWork]
+      sort: [publishedAt, title]
+      search: [title, description, category, body]
+      default:
+        sort: publishedAt
+        order: desc
+
+    fields:
+      - name: title
+        label: Título
+        type: string
+        required: true
+        description: Título visible en la tarjeta y en la publicación.
+
+      - name: description
+        label: Resumen
+        type: text
+        required: true
+        description: Descripción breve para la tarjeta y los buscadores.
+        options:
+          minlength: 20
+          maxlength: 220
+
+      - name: publishedAt
+        label: Fecha de publicación
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+
+      - name: category
+        label: Categoría principal
+        type: select
+        required: true
+        options:
+          values:
+            - name: Backend
+              label: Backend
+            - name: APIs
+              label: APIs
+            - name: Data
+              label: Datos
+            - name: Machine learning
+              label: Machine learning
+            - name: Tooling
+              label: Automatización / Tooling
+
+      - name: workCategories
+        label: Categorías de Work
+        type: select
+        description: Permite compartir vistas filtradas del portafolio.
+        options:
+          multiple: true
+          values:
+            - name: Backend
+              label: Backend
+            - name: APIs
+              label: APIs
+            - name: Data
+              label: Datos
+            - name: Machine learning
+              label: Machine learning
+            - name: Tooling
+              label: Tooling
+            - name: Automatización
+              label: Automatización
+
+      - name: number
+        label: Número visual
+        type: string
+        required: true
+        pattern:
+          regex: "^[0-9]{2}$"
+          message: Usa dos dígitos, por ejemplo 04.
+        description: Identificador que aparece en la tarjeta; no controla el orden.
+
+      - name: readingTime
+        label: Tiempo de lectura
+        type: string
+        required: true
+        default: "5 min"
+
+      - name: image
+        label: Imagen de tarjeta
+        type: select
+        required: true
+        default: material
+        options:
+          values:
+            - name: material
+              label: Material / arquitectura
+            - name: whisperer
+              label: Modelo predictivo
+            - name: character
+              label: Aplicación móvil
+            - name: mellow
+              label: Datos y visualización
+            - name: phone
+              label: Realidad aumentada
+
+      - name: showInBlog
+        label: Mostrar en Blog
+        type: boolean
+        default: true
+
+      - name: showInWork
+        label: Mostrar en Work
+        type: boolean
+        default: false
+
+      - name: draft
+        label: Mantener como borrador
+        type: boolean
+        default: true
+        description: Desactívalo cuando el contenido esté listo para publicarse.
+
+      - name: body
+        label: Contenido
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          switcher: true
+          media: content_images
+          path: blog
+          rename: safe
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "content: crear {filename}"
+      update: "content: actualizar {filename}"
+      delete: "content: eliminar {filename}"
+      rename: "content: renombrar {oldFilename} a {newFilename}"

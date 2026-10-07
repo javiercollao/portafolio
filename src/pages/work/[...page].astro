@@ -1,0 +1,23 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkGrid from '../../components/WorkGrid.astro';
+import Pagination from '../../components/Pagination.astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft && data.showInWork))
+    .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+  return paginate(posts, { pageSize: 5 });
+}) satisfies GetStaticPaths;
+
+interface Props { page: Page<CollectionEntry<'blog'>> }
+const { page } = Astro.props;
+---
+
+<BaseLayout title="Work — Javier" description="Proyectos y casos de estudio seleccionados." current="work">
+  <main id="main">
+    <WorkGrid posts={page.data} />
+    <Pagination page={page} />
+  </main>
+</BaseLayout>

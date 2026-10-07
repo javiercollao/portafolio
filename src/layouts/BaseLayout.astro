@@ -1,0 +1,39 @@
+---
+import Header from '../components/Header.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: string;
+}
+
+const {
+  title = 'Javier — Software Engineer',
+  description = 'Portafolio y notas de ingeniería de Javier.',
+  current = ''
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#070706" />
+    <meta name="description" content={description} />
+    <link rel="icon" href={`data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>J</text></svg>`} />
+    <title>{title}</title>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <div class="site-shell">
+      <Header current={current} />
+      <slot />
+      <footer class="site-footer">
+        <span>© {new Date().getFullYear()} Javier — Santiago, CL</span>
+        <a href="#top">Volver arriba ↑</a>
+      </footer>
+    </div>
+  </body>
+</html>

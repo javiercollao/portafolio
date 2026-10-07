@@ -1,0 +1,58 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft))
+    .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+
+  return posts.map((post, index) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      previous: posts[index + 1] ?? posts[0],
+      next: posts[index - 1] ?? posts.at(-1)
+    }
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  previous: CollectionEntry<'blog'>;
+  next: CollectionEntry<'blog'>;
+}
+
+const { post, previous, next } = Astro.props;
+const { Content } = await render(post);
+const base = import.meta.env.BASE_URL;
+const date = post.data.publishedAt.toLocaleDateString('es-CL', {
+  day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC'
+});
+---
+
+<BaseLayout title={`${post.data.title} — Javier`} description={post.data.description} current="blog">
+  <main id="main" class="article-layout">
+    <article>
+      <header class="article-header">
+        <p class="eyebrow">{post.data.category} / {post.data.number}</p>
+        <h1>{post.data.title}</h1>
+        <p class="article-deck">{post.data.description}</p>
+      </header>
+      <div class="article-content"><Content /></div>
+      <nav class="article-nav" aria-label="Publicaciones adyacentes">
+        <a href={`${base}blog/${previous.id}/`}>← {previous.data.title}</a>
+        <a href={`${base}blog/${next.id}/`}>{next.data.title} →</a>
+      </nav>
+    </article>
+    <aside class="article-aside" aria-label="Información de la publicación">
+      <p class="eyebrow">Article file</p>
+      <dl>
+        <div><dt>Publicado</dt><dd>{date}</dd></div>
+        <div><dt>Tema</dt><dd>{post.data.category}</dd></div>
+        <div><dt>Lectura</dt><dd>{post.data.readingTime}</dd></div>
+        <div><dt>Formato</dt><dd>Markdown → HTML</dd></div>
+      </dl>
+      <a class="text-link" href={`${base}blog/`}>Todas las notas <span>↗</span></a>
+    </aside>
+  </main>
+</BaseLayout>

@@ -1,0 +1,15 @@
+---
+const { current = '' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<header class="site-header">
+  <a class="wordmark" href={base} aria-label="Inicio de Javier">JAVIER</a>
+  <p class="site-tagline">Software engineer / Santiago, CL</p>
+  <nav class="site-nav" aria-label="Navegación principal">
+    <a class:list={{ active: current === 'work' }} href={base}>Work</a>
+    <a class:list={{ active: current === 'about' }} href={`${base}#about`}>About</a>
+    <a class:list={{ active: current === 'blog' }} href={`${base}blog/`}>Blog</a>
+    <a href="mailto:hola@javier.dev">Contact</a>
+  </nav>
+</header>
