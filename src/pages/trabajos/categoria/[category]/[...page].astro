@@ -39,11 +39,11 @@ const { page, categoryLabel } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title={`${categoryLabel} — Work — Javier`} description={`Proyectos de ${categoryLabel} seleccionados.`} current="work">
+<BaseLayout title={`${categoryLabel} — Trabajos — Javier`} description={`Proyectos de ${categoryLabel} seleccionados.`} current="trabajos">
   <main id="main">
     <header class="category-heading">
-      <div><span>Work / Categoría</span><h1>{categoryLabel}</h1></div>
-      <a href={base}>Ver todo el work →</a>
+      <div><span>Trabajos / Categoría</span><h1>{categoryLabel}</h1></div>
+      <a href={base}>Ver todos los trabajos →</a>
     </header>
     <WorkGrid posts={page.data} />
     <Pagination page={page} />

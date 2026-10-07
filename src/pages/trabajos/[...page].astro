@@ -15,7 +15,7 @@ interface Props { page: Page<CollectionEntry<'blog'>> }
 const { page } = Astro.props;
 ---
 
-<BaseLayout title="Work — Javier" description="Proyectos y casos de estudio seleccionados." current="work">
+<BaseLayout title="Trabajos — Javier" description="Proyectos y casos de estudio seleccionados." current="trabajos">
   <main id="main">
     <WorkGrid posts={page.data} />
     <Pagination page={page} />

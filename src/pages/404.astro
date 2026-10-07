@@ -8,23 +8,23 @@ const base = import.meta.env.BASE_URL;
     <section class="error-stage" aria-labelledby="error-title">
       <div class="error-code" aria-hidden="true"><span>4</span><span>0</span><span>4</span></div>
       <div class="error-copy">
-        <p class="eyebrow">Error / Route not found</p>
+        <p class="eyebrow">Error / Ruta no encontrada</p>
         <h1 id="error-title">Esta ruta no existe.</h1>
         <p>El enlace puede haber cambiado, el contenido fue movido o llegaste a una dirección que todavía no hemos construido.</p>
       </div>
     </section>
 
     <section class="error-console" aria-label="Detalle del error">
-      <div><span>STATUS</span><strong>404_NOT_FOUND</strong></div>
-      <div><span>REQUEST</span><strong id="requested-path">Ruta desconocida</strong></div>
-      <div><span>NEXT_STEP</span><strong>Selecciona una ruta disponible</strong></div>
+      <div><span>ESTADO</span><strong>404_NO_ENCONTRADO</strong></div>
+      <div><span>SOLICITUD</span><strong id="requested-path">Ruta desconocida</strong></div>
+      <div><span>SIGUIENTE PASO</span><strong>Selecciona una ruta disponible</strong></div>
     </section>
 
     <nav class="error-links" aria-label="Rutas disponibles">
       <a href={base}><span>01</span>Inicio <b>→</b></a>
-      <a href={`${base}work/`}><span>02</span>Work <b>→</b></a>
+      <a href={`${base}trabajos/`}><span>02</span>Trabajos <b>→</b></a>
       <a href={`${base}blog/`}><span>03</span>Blog <b>→</b></a>
-      <a href="mailto:hola@javier.dev"><span>04</span>Contacto <b>↗</b></a>
+      <a href="mailto:javiercollaoc@gmail.com"><span>04</span>Contacto <b>↗</b></a>
     </nav>
   </main>
   <script is:inline>

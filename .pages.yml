@@ -65,7 +65,7 @@ content:
               label: Automatización / Tooling
 
       - name: workCategories
-        label: Categorías de Work
+        label: Categorías de trabajos
         type: select
         description: Permite compartir vistas filtradas del portafolio.
         options:
@@ -103,7 +103,7 @@ content:
         label: Imagen de portada
         type: image
         required: true
-        description: Se utiliza en las tarjetas de Blog y Work.
+        description: Se utiliza en las tarjetas del blog y de trabajos.
         options:
           media: content_images
           path: covers
@@ -116,7 +116,7 @@ content:
         default: true
 
       - name: showInWork
-        label: Mostrar en Work
+        label: Mostrar en trabajos
         type: boolean
         default: false
 

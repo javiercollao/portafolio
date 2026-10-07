@@ -3,7 +3,14 @@ import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize, resolve } from 'node:path';
 
 const root = resolve('dist');
-const port = Number(process.env.PORT || 4321);
+const args = process.argv.slice(2);
+const portFlag = args.findIndex((arg) => arg === '--port' || arg === '-p');
+const portArgument = portFlag >= 0 ? args[portFlag + 1] : undefined;
+const port = Number(portArgument || process.env.PORT || 4321);
+
+if (!Number.isInteger(port) || port < 1 || port > 65535) {
+  throw new Error(`Puerto inválido: ${portArgument || process.env.PORT}`);
+}
 const mimeTypes = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
@@ -46,5 +53,5 @@ createServer(async (request, response) => {
     await sendFile(response, join(root, '404.html'), 404);
   }
 }).listen(port, '127.0.0.1', () => {
-  console.log(`GitHub Pages preview: http://127.0.0.1:${port}`);
+  console.log(`Vista previa de GitHub Pages: http://127.0.0.1:${port}`);
 });

@@ -13,11 +13,11 @@ const firstPage = {
   data: work.slice(0, pageSize),
   currentPage: 1,
   lastPage,
-  url: { prev: undefined, next: lastPage > 1 ? '/work/2/' : undefined }
+  url: { prev: undefined, next: lastPage > 1 ? '/trabajos/2/' : undefined }
 };
 ---
 
-<BaseLayout current="work">
+<BaseLayout current="trabajos">
   <main id="main">
     <WorkGrid posts={firstPage.data} />
     <Pagination page={firstPage} />

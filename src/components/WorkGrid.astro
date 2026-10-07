@@ -10,15 +10,13 @@ const base = import.meta.env.BASE_URL;
 <section class="work-grid" aria-label="Proyectos seleccionados">
   {posts.slice(0, 2).map((post, index) => <PostCard post={post} priority={index === 0} />)}
 
-  <aside class="intro-panel" id="about" aria-labelledby="work-intro-title">
-    <h1 id="work-intro-title">Hello there</h1>
-    <p>Soy Javier, software engineer de Santiago, Chile. Me enfoco en backend, datos, IA y en resolver problemas reales a través de la tecnología.</p>
+  <aside class="intro-panel" id="sobre-mi" aria-labelledby="work-intro-title">
+    <h1 id="work-intro-title">Hola</h1>
+    <p>Soy Javier, ingeniero de software de Santiago, Chile. Me enfoco en backend, datos, IA y en resolver problemas reales a través de la tecnología.</p>
     <p>Me interesa construir productos útiles, trabajar en equipos simples y aprender constantemente.</p>
     <nav class="profile-links" aria-label="Enlaces de perfil">
-      <a href={`${base}#about`}>Sobre mí <span>→</span></a>
-      <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn <span>→</span></a>
-      <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub <span>→</span></a>
-      <a href="mailto:hola@javier.dev">Contacto <span>→</span></a>
+      <a href="https://www.linkedin.com/in/javiercollaocallpa/" target="_blank" rel="noopener noreferrer">LinkedIn <span>→</span></a>
+      <a href="mailto:javiercollaoc@gmail.com">Correo <span>→</span></a>
     </nav>
   </aside>
 

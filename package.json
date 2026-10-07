@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "preview:pages": "node scripts/preview-pages.mjs",
+    "preview": "npm run build && node scripts/preview-pages.mjs",
+    "preview:astro": "astro preview",
+    "preview:pages": "npm run preview",
     "check": "astro check"
   },
   "dependencies": {

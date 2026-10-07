@@ -36,23 +36,23 @@ Contenido del artículo en Markdown.
 `cover` es la ruta de una imagen subida desde Pages CMS. Las publicaciones antiguas conservan temporalmente su campo `image` como respaldo; al asignarles una portada desde el panel, `cover` tendrá prioridad.
 
 - `showInBlog: true`: incluye la entrada en `/blog/`.
-- `showInWork: true`: incluye la entrada en `/work/` y entre los trabajos recientes de la portada.
+- `showInWork: true`: incluye la entrada en `/trabajos/` y entre los trabajos recientes de la portada.
 - `workCategories`: crea una página filtrada por cada categoría cuando `showInWork` es `true`. Un proyecto puede tener varias.
 - Ambos pueden ser `true` si el contenido funciona como artículo y caso de estudio.
 - Con ambos en `false`, la URL individual se genera pero no aparece en los listados.
 - `draft: true` impide que la entrada y su URL se publiquen.
 
-Blog se pagina cada cuatro entradas. Work conserva la composición de cinco proyectos y un panel personal de la portada original, por lo que se pagina cada cinco entradas. Las páginas siguientes se generan como `/blog/2/`, `/work/2/`, etc.
+El blog se pagina cada cuatro entradas. Trabajos conserva la composición de cinco proyectos y un panel personal de la portada original, por lo que se pagina cada cinco entradas. Las páginas siguientes se generan como `/blog/2/`, `/trabajos/2/`, etc.
 
 Las páginas de categoría no se muestran en la navegación, pero se generan como enlaces compartibles. Por ejemplo:
 
 ```text
-/work/categoria/backend/
-/work/categoria/machine-learning/
-/work/categoria/apis/
+/trabajos/categoria/backend/
+/trabajos/categoria/machine-learning/
+/trabajos/categoria/apis/
 ```
 
-Si `workCategories` se omite, se utiliza el valor de `category` como única categoría de Work.
+Si `workCategories` se omite, se utiliza el valor de `category` como única categoría de trabajos.
 
 ## Generar HTML
 
@@ -60,16 +60,19 @@ Si `workCategories` se omite, se utiliza el valor de `category` como única cate
 npm run build
 ```
 
-El resultado publicable queda en `dist/`. `npm run preview` permite revisar ese resultado localmente.
-
-Para probar también el comportamiento real de la página 404 de GitHub Pages:
+El resultado publicable queda en `dist/`. Para revisar el sitio con el mismo comportamiento de rutas inexistentes que GitHub Pages:
 
 ```sh
-npm run build
-npm run preview:pages
+npm run preview
 ```
 
-La vista se abre en `http://127.0.0.1:4321` y devuelve `dist/404.html` ante cualquier ruta inexistente. El servidor de desarrollo de Astro usa su propio fallback interno para algunas rutas dinámicas, por eso esta vista es la adecuada para validar el resultado publicado.
+La vista se abre en `http://127.0.0.1:4321` y devuelve `dist/404.html` ante cualquier ruta inexistente. Para utilizar otro puerto:
+
+```sh
+npm run preview -- --port 4322
+```
+
+El servidor de desarrollo de Astro (`npm run dev`) usa su propio manejo interno para algunas rutas dinámicas. Para validar la página 404 y el resultado que se publicará, utiliza siempre `npm run preview`.
 
 ## GitHub Pages
 
